@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76326B3F22B670D10033A40E /* UIView+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76326B3E22B670D10033A40E /* UIView+Storyboard.swift */; };
 		9E41A74F22B5143D00125555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A74E22B5143D00125555 /* AppDelegate.swift */; };
 		9E41A75122B5143D00125555 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A75022B5143D00125555 /* MainViewController.swift */; };
 		9E41A75422B5143D00125555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E41A75222B5143D00125555 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76326B3E22B670D10033A40E /* UIView+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Storyboard.swift"; sourceTree = "<group>"; };
 		9E41A74B22B5143D00125555 /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E41A74E22B5143D00125555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E41A75022B5143D00125555 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76326B3D22B6704A0033A40E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				76326B3E22B670D10033A40E /* UIView+Storyboard.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9E41A74222B5143C00125555 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 		9E41A74D22B5143D00125555 /* scoreboard */ = {
 			isa = PBXGroup;
 			children = (
+				76326B3D22B6704A0033A40E /* Extensions */,
 				9E41A76322B515AB00125555 /* Controller */,
 				9E41A74E22B5143D00125555 /* AppDelegate.swift */,
 				9E41A75222B5143D00125555 /* Main.storyboard */,
@@ -150,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E41A75722B5143D00125555 /* scoreboard.xcdatamodeld in Sources */,
+				76326B3F22B670D10033A40E /* UIView+Storyboard.swift in Sources */,
 				9E41A75122B5143D00125555 /* MainViewController.swift in Sources */,
 				9E41A74F22B5143D00125555 /* AppDelegate.swift in Sources */,
 				9E41A76522B5163100125555 /* SettingsViewController.swift in Sources */,
@@ -308,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ios-app.scoreboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,7 +338,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ios-app.scoreboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

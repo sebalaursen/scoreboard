@@ -10,12 +10,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var leftScore: UILabel!
-    @IBOutlet weak var rightScore: UILabel!
+    @IBOutlet weak var leftScoreLabel: UILabel!
+    @IBOutlet weak var leftNameLabel: UILabel!
+    @IBOutlet weak var rightScoreLabel: UILabel!
+    @IBOutlet weak var rightNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var startBtn: UIButton!
-    @IBOutlet weak var pauseBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +28,13 @@ class MainViewController: UIViewController {
         let hold = UILongPressGestureRecognizer(target: self, action: #selector(handleHold(sender:)))
         let hold1 = UILongPressGestureRecognizer(target: self, action: #selector(handleHold(sender:)))
         
-        leftScore.addGestureRecognizer(tap)
-        leftScore.addGestureRecognizer(hold)
-        rightScore.addGestureRecognizer(tap1)
-        rightScore.addGestureRecognizer(hold1)
+        leftScoreLabel.addGestureRecognizer(tap)
+        leftScoreLabel.addGestureRecognizer(hold)
+        rightScoreLabel.addGestureRecognizer(tap1)
+        rightScoreLabel.addGestureRecognizer(hold1)
         
-        leftScore.isUserInteractionEnabled = true
-        rightScore.isUserInteractionEnabled = true
+        leftScoreLabel.isUserInteractionEnabled = true
+        rightScoreLabel.isUserInteractionEnabled = true
     }
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
