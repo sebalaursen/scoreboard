@@ -8,6 +8,10 @@
 
 import UIKit
 
+fileprivate enum ScoreboardState {
+    case running, finished, paused, clear
+}
+
 class MainViewController: UIViewController {
     
     @IBOutlet weak var leftScoreLabel: UILabel!
@@ -15,6 +19,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var rightScoreLabel: UILabel!
     @IBOutlet weak var rightNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var startButton: UIButton!
+    
+    fileprivate var currentState = ScoreboardState.clear {
+        willSet {
+            stateDidChange(with: newValue)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +43,12 @@ class MainViewController: UIViewController {
         leftScoreLabel.addGestureRecognizer(hold)
         rightScoreLabel.addGestureRecognizer(tap1)
         rightScoreLabel.addGestureRecognizer(hold1)
-        
-        leftScoreLabel.isUserInteractionEnabled = true
-        rightScoreLabel.isUserInteractionEnabled = true
     }
+}
+
+// MARK: - Actions
+
+extension MainViewController {
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         guard let score = sender.view as! UILabel? else {
@@ -56,7 +69,55 @@ class MainViewController: UIViewController {
             score.text = "\(current)"
         }
     }
-
-
+    
+    @IBAction func start(_ sender: UIButton) {
+        switch  sender.tag {
+        case 0:
+            currentState = .running
+            sender.tag = 1
+        default:
+            currentState = .paused
+            sender.tag = 0
+        }
+        
+    }
+    
+    @IBAction func reset(_ sender: UIButton) {
+        currentState = .clear
+    }
 }
 
+// MARK: - Scoreboard State
+
+extension MainViewController {
+    
+    private func stateDidChange(with state: ScoreboardState) {
+        switch state {
+            
+        case .running:
+            continueScore()
+        case .finished:
+            finishFight()
+        case .paused:
+            pauseScore()
+        case .clear:
+            resetScore()
+        }
+    }
+    
+    private func finishFight() {
+        
+    }
+    
+    private func resetScore() {
+        startButton.setTitle("Start", for: .normal)
+    }
+    
+    private func pauseScore() {
+        startButton.setTitle("Continue", for: .normal)
+    }
+    
+    private func continueScore() {
+        startButton.setTitle("Pause", for: .normal)
+    }
+}
