@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol FinishDelegate: class {
+    var isRematch: Bool { get set}
+}
+
 class FinishViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leftScoreLabel: UILabel!
     @IBOutlet weak var rightScoreLabel: UILabel!
+    weak var delegate: FinishDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,7 @@ class FinishViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = -self.view.frame.height
         }) { (finished) in
+            self.delegate?.isRematch = true
             self.view.removeFromSuperview()
         }
     }
@@ -31,6 +37,7 @@ class FinishViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = self.view.frame.height
         }) { (finished) in
+            self.delegate?.isRematch = false
             self.view.removeFromSuperview()
         }
     }

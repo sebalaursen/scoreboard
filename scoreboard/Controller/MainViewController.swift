@@ -54,11 +54,15 @@ class MainViewController: UIViewController {
         popUp.view.frame = CGRect(x: 0, y: -view.frame.height, width: view.frame.width, height: view.frame.height) //self.view.frame
         self.view.addSubview(popUp.view)
         
-        UIView.animate(withDuration: 0.3, animations: {
-            popUp.view.frame.origin.y = -10
+        UIView.animate(withDuration: 0.25, animations: {
+            popUp.view.frame.origin.y = 10
         }) { (finished) in
-            UIView.animate(withDuration: 0.1) {
-                popUp.view.frame.origin.y = 0
+            UIView.animate(withDuration: 0.09, animations: {
+                popUp.view.frame.origin.y = -7
+            }) { (finished) in
+                UIView.animate(withDuration: 0.06) {
+                    popUp.view.frame.origin.y = 0
+                }
             }
         }
     }
