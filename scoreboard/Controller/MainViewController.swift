@@ -23,11 +23,17 @@ class MainViewController: UIViewController {
     private func addGestures() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        
+        let hold = UILongPressGestureRecognizer(target: self, action: #selector(handleHold(sender:)))
+        let hold1 = UILongPressGestureRecognizer(target: self, action: #selector(handleHold(sender:)))
+        
         leftScore.addGestureRecognizer(tap)
+        leftScore.addGestureRecognizer(hold)
         rightScore.addGestureRecognizer(tap1)
+        rightScore.addGestureRecognizer(hold1)
+        
         leftScore.isUserInteractionEnabled = true
         rightScore.isUserInteractionEnabled = true
-        
     }
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
@@ -36,6 +42,15 @@ class MainViewController: UIViewController {
         }
         var current = Int(score.text!)!
         current += 1
+        score.text = "\(current)"
+    }
+    
+    @objc private func handleHold(sender: UITapGestureRecognizer) {
+        guard let score = sender.view as! UILabel? else {
+            return
+        }
+        var current = Int(score.text!)!
+        current -= 1
         score.text = "\(current)"
     }
 
