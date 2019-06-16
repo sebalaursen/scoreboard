@@ -15,14 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if UserDefaults.standard.object(forKey: "maxTime") != nil{
-            Settings.maxTime = UserDefaults.standard.maxTime
-        }
-        if UserDefaults.standard.object(forKey: "maxPoints") != nil{
-            Settings.maxPoints = UserDefaults.standard.maxPoints
-        }
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         return true
     }
 
