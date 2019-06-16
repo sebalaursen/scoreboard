@@ -8,8 +8,9 @@
 
 import Foundation
 
-enum userDefaultsKey: String {
-    case maxTime, maxPoint
+enum UserDefaultsKey: String {
+    case maxTime = "maxTime"
+    case maxPoint = "maxPoint"
 }
 
 class Settings {
