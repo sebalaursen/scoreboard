@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7608EA0422B6ED0F00E75EDE /* TimeInterval+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7608EA0322B6ED0F00E75EDE /* TimeInterval+String.swift */; };
 		76326B3F22B670D10033A40E /* UIView+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76326B3E22B670D10033A40E /* UIView+Storyboard.swift */; };
 		9E41A74F22B5143D00125555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A74E22B5143D00125555 /* AppDelegate.swift */; };
 		9E41A75122B5143D00125555 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A75022B5143D00125555 /* MainViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7608EA0322B6ED0F00E75EDE /* TimeInterval+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+String.swift"; sourceTree = "<group>"; };
 		76326B3E22B670D10033A40E /* UIView+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Storyboard.swift"; sourceTree = "<group>"; };
 		9E41A74B22B5143D00125555 /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E41A74E22B5143D00125555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				76326B3E22B670D10033A40E /* UIView+Storyboard.swift */,
+				7608EA0322B6ED0F00E75EDE /* TimeInterval+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				9E41A76822B690BE00125555 /* Settings.swift in Sources */,
 				9E41A75722B5143D00125555 /* scoreboard.xcdatamodeld in Sources */,
+				7608EA0422B6ED0F00E75EDE /* TimeInterval+String.swift in Sources */,
 				76326B3F22B670D10033A40E /* UIView+Storyboard.swift in Sources */,
 				9E41A75122B5143D00125555 /* MainViewController.swift in Sources */,
 				9E41A74F22B5143D00125555 /* AppDelegate.swift in Sources */,

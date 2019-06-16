@@ -14,13 +14,19 @@ enum UserDefaultsKey: String {
 }
 
 class Settings {
-    static var maxTime: Int{
+    
+    static var maxTime: Int {
         let res = UserDefaults.standard.integer(forKey: UserDefaultsKey.maxTime.rawValue)
         return res ==  0 ? 3 : res
     }
-    static var maxPoint: Int{
+    
+    static var maxPoint: Int {
         let res = UserDefaults.standard.integer(forKey: UserDefaultsKey.maxPoint.rawValue)
         return res == 0 ? 5 : res
+    }
+    
+    static var secondTimeForRound: Int {
+        return maxTime * 60
     }
     
     static func setMaxTime(_ time: Int) {
