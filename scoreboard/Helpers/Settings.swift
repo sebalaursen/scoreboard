@@ -15,19 +15,19 @@ enum UserDefaultsKey: String {
 
 class Settings {
     static var maxTime: Int{
-        let res = UserDefaults.standard.integer(forKey: userDefaultsKey.maxTime.rawValue)
+        let res = UserDefaults.standard.integer(forKey: UserDefaultsKey.maxTime.rawValue)
         return res ==  0 ? 3 : res
     }
     static var maxPoint: Int{
-        let res = UserDefaults.standard.integer(forKey: userDefaultsKey.maxPoint.rawValue)
+        let res = UserDefaults.standard.integer(forKey: UserDefaultsKey.maxPoint.rawValue)
         return res == 0 ? 5 : res
     }
     
     static func setMaxTime(_ time: Int) {
-        UserDefaults.standard.set(time, forKey: userDefaultsKey.maxTime.rawValue)
+        UserDefaults.standard.set(time, forKey: UserDefaultsKey.maxTime.rawValue)
     }
     
     static func setMaxPoint(_ point: Int) {
-        UserDefaults.standard.set(point, forKey: userDefaultsKey.maxPoint.rawValue)
+        UserDefaults.standard.set(point, forKey: UserDefaultsKey.maxPoint.rawValue)
     }
 }
