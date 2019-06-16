@@ -37,6 +37,32 @@ class MainViewController: UIViewController {
         rightScoreLabel.isUserInteractionEnabled = true
     }
     
+    private func showNamingPopUp() {
+        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NamingVC") as! NamingViewController
+        self.addChild(popUp)
+        popUp.view.frame = CGRect(x: -view.frame.width, y: 0, width: view.frame.width, height: view.frame.height)
+        self.view.addSubview(popUp.view)
+
+        UIView.animate(withDuration: 0.3) {
+            popUp.view.frame.origin.x = 0
+        }
+    }
+    
+    private func showFinishPopUp(title: String, leftScore: String, rightScore: String) {
+        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishVC") as! FinishViewController
+        self.addChild(popUp)
+        popUp.view.frame = CGRect(x: 0, y: -view.frame.height, width: view.frame.width, height: view.frame.height) //self.view.frame
+        self.view.addSubview(popUp.view)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            popUp.view.frame.origin.y = -10
+        }) { (finished) in
+            UIView.animate(withDuration: 0.1) {
+                popUp.view.frame.origin.y = 0
+            }
+        }
+    }
+    
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         guard let score = sender.view as! UILabel? else {
             return
@@ -56,7 +82,4 @@ class MainViewController: UIViewController {
             score.text = "\(current)"
         }
     }
-
-
 }
-
