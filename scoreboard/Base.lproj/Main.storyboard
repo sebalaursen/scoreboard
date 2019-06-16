@@ -39,13 +39,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="o7h-nJ-eUu">
-                                <rect key="frame" x="54.5" y="114" width="305.5" height="97"/>
+                                <rect key="frame" x="35" y="90" width="305.5" height="97"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="RkR-d2-1vH">
                                         <rect key="frame" x="0.0" y="0.0" width="305.5" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zG-YI-gTb">
                                                 <rect key="frame" x="0.0" y="0.0" width="120.5" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120.5" id="4Mk-TL-THs"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -53,7 +56,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Itk-Ra-CgS">
                                                 <rect key="frame" x="180.5" y="0.0" width="125" height="31"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="125" id="GUU-XM-jIq"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="GUU-XM-jIq"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -65,15 +68,18 @@
                                         <rect key="frame" x="0.0" y="66" width="305.5" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bout Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bk6-3F-Zfi">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.5" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="116.5" id="bKz-G9-fTJ"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3 minutes" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxk-Ce-1Cg">
-                                                <rect key="frame" x="180.5" y="0.0" width="125" height="31"/>
+                                                <rect key="frame" x="176.5" y="0.0" width="129" height="31"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="125" id="UGe-VJ-BZX"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="UGe-VJ-BZX"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>

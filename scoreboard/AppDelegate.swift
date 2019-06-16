@@ -16,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if UserDefaults.standard.object(forKey: "maxTime") != nil{
+            Settings.maxTime = UserDefaults.standard.maxTime
+        }
+        if UserDefaults.standard.object(forKey: "maxPoints") != nil{
+            Settings.maxPoints = UserDefaults.standard.maxPoints
+        }
+        
         return true
     }
 

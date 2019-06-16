@@ -15,6 +15,7 @@
 		9E41A75922B5143E00125555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E41A75822B5143E00125555 /* Assets.xcassets */; };
 		9E41A75C22B5143E00125555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E41A75A22B5143E00125555 /* LaunchScreen.storyboard */; };
 		9E41A76522B5163100125555 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A76422B5163100125555 /* SettingsViewController.swift */; };
+		9E41A76822B690BE00125555 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A76722B690BE00125555 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9E41A75B22B5143E00125555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E41A75D22B5143E00125555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E41A76422B5163100125555 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9E41A76722B690BE00125555 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		9E41A74D22B5143D00125555 /* scoreboard */ = {
 			isa = PBXGroup;
 			children = (
+				9E41A76622B6907B00125555 /* Helpers */,
 				76326B3D22B6704A0033A40E /* Extensions */,
 				9E41A76322B515AB00125555 /* Controller */,
 				9E41A74E22B5143D00125555 /* AppDelegate.swift */,
@@ -87,6 +90,14 @@
 				9E41A76422B5163100125555 /* SettingsViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9E41A76622B6907B00125555 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E41A76722B690BE00125555 /* Settings.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E41A76822B690BE00125555 /* Settings.swift in Sources */,
 				9E41A75722B5143D00125555 /* scoreboard.xcdatamodeld in Sources */,
 				76326B3F22B670D10033A40E /* UIView+Storyboard.swift in Sources */,
 				9E41A75122B5143D00125555 /* MainViewController.swift in Sources */,
