@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        timerLabel.text = "00:0\(Settings.maxTime):00"
         addGestures()
     }
     
