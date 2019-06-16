@@ -9,22 +9,89 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
+    @IBOutlet weak var scoreTF: UITextField!
+    @IBOutlet weak var timeTF: UITextField!
+    let times = [ "", "1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes"]
+    let points = [ "", "5", "10", "15"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupPickers()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupPickers() {
+        let pointPicker = UIPickerView()
+        pointPicker.delegate = self
+        pointPicker.backgroundColor = .lightGray
+        
+        let timePicker = UIPickerView()
+        timePicker.delegate = self
+        timePicker.backgroundColor = .lightGray
+        
+        scoreTF.inputView = pointPicker
+        timeTF.inputView = timePicker
+        setUpToolbar()
     }
-    */
+    
+    func setUpToolbar() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        toolBar.backgroundColor = UIColor.darkGray
+        
+        let doneBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissPicker))
+        
+        toolBar.setItems([doneBtn], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        scoreTF.inputAccessoryView = toolBar
+        timeTF.inputAccessoryView = toolBar
+    }
+    
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
+    
+    
+}
 
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == timeTF.inputView {
+            return times.count
+        }
+        else {
+            return points.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == timeTF.inputView {
+            return times[row]
+        }
+        else {
+            return points[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == timeTF.inputView {
+            timeTF.text = times[row]
+            if times[row] != "" {
+                if let num = timeTF.text!.components(separatedBy: " ").first {
+                    UserDefaults.standard.set(Int(num), forKey: "maxTime")
+                }
+            }
+        }
+        else {
+            scoreTF.text = points[row]
+            if points[row] != "" {
+                UserDefaults.standard.set(Int(scoreTF.text!)!, forKey: "maxPoints")
+            }
+        }
+    }
 }
