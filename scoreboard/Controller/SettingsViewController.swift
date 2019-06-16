@@ -12,8 +12,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var scoreTF: UITextField!
     @IBOutlet weak var timeTF: UITextField!
-    let times = ["1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes"]
-    let points = ["5", "10", "15"]
+    let times = [ "", "1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes"]
+    let points = [ "", "5", "10", "15"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,14 +81,17 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == timeTF.inputView {
             timeTF.text = times[row]
-            if let num = timeTF.text!.components(separatedBy: " ").first {
-                Settings.setMaxTime(Int(num)!)
+            if times[row] != "" {
+                if let num = timeTF.text!.components(separatedBy: " ").first {
+                    UserDefaults.standard.set(Int(num), forKey: "maxTime")
+                }
             }
         }
         else {
-            let point = points[row]
-            scoreTF.text = point
-            Settings.setMaxPoint(Int(point)!)
+            scoreTF.text = points[row]
+            if points[row] != "" {
+                UserDefaults.standard.set(Int(scoreTF.text!)!, forKey: "maxPoints")
+            }
         }
     }
 }
