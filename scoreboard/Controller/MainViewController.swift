@@ -12,8 +12,10 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var leftScore: UILabel!
     @IBOutlet weak var rightScore: UILabel!
-    private var currentLeftScore = 0
-    private var currentRightScore = 0
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var pauseBtn: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +48,14 @@ class MainViewController: UIViewController {
     }
     
     @objc private func handleHold(sender: UITapGestureRecognizer) {
-        guard let score = sender.view as! UILabel? else {
-            return
+        if sender.state == UIGestureRecognizer.State.began {
+            guard let score = sender.view as! UILabel?, score.text != "0" else {
+                return
+            }
+            var current = Int(score.text!)!
+            current -= 1
+            score.text = "\(current)"
         }
-        var current = Int(score.text!)!
-        current -= 1
-        score.text = "\(current)"
     }
 
 

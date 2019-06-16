@@ -29,7 +29,7 @@
             </objects>
             <point key="canvasLocation" x="-1483" y="149"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="5RN-vg-c7o">
             <objects>
                 <viewController id="1gB-y2-gcl" customClass="SettingsViewController" customModule="scoreboard" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TzC-tm-BiR"/>
                     </view>
-                    <tabBarItem key="tabBarItem" id="S1a-Lq-OJZ"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="S1a-Lq-OJZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccj-0q-yQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,9 +54,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00000:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQ2-Tc-lgg">
-                                <rect key="frame" x="62" y="581" width="291" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQ2-Tc-lgg">
+                                <rect key="frame" x="106" y="376" width="202" height="60"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -70,23 +69,51 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOA-2d-H5T">
                                 <rect key="frame" x="323" y="145" width="30" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="XQB-hO-1Gr">
+                                <rect key="frame" x="106" y="438" width="202" height="34"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNj-Pq-UwY">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="START"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efH-0F-Rqi">
+                                        <rect key="frame" x="80" y="0.0" width="53" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="PAUSE"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sq7-oU-hsQ">
+                                        <rect key="frame" x="158" y="0.0" width="44" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="STOP"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XQB-hO-1Gr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C15-CU-a6c"/>
+                            <constraint firstItem="XQ2-Tc-lgg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eZs-K7-bFo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Board" id="65E-rv-8pr"/>
                     <connections>
                         <outlet property="leftScore" destination="JYI-Mb-HVP" id="FsL-eK-8gG"/>
+                        <outlet property="pauseBtn" destination="efH-0F-Rqi" id="DHe-JL-sKR"/>
                         <outlet property="rightScore" destination="lOA-2d-H5T" id="1nA-PZ-jC8"/>
+                        <outlet property="startBtn" destination="mNj-Pq-UwY" id="oDx-zg-nsh"/>
+                        <outlet property="stopBtn" destination="Sq7-oU-hsQ" id="Pfl-MK-FYc"/>
+                        <outlet property="timerLabel" destination="XQ2-Tc-lgg" id="HIP-Px-ofe"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-543" y="-161"/>
+            <point key="canvasLocation" x="-543.47826086956525" y="-161.38392857142856"/>
         </scene>
     </scenes>
 </document>
