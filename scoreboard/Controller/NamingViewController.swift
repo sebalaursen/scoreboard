@@ -12,7 +12,8 @@ protocol NamingDelegate: class {
     func getName(leftName: String, rightName: String)
 }
 
-class NamingViewController: UIViewController {
+class NamingViewController: UIViewController, Storyboarded {
+    
     @IBOutlet weak var leftNameTF: UITextField!
     @IBOutlet weak var rightNameTF: UITextField!
     
@@ -24,6 +25,7 @@ class NamingViewController: UIViewController {
 }
 
 extension NamingViewController {
+    
     @IBAction func doneAction(_ sender: Any) {
         if leftNameTF.text != "" && rightNameTF.text != "" {
             UIView.animate(withDuration: 0.3, animations: {
@@ -60,3 +62,14 @@ extension NamingViewController {
         }
     }
 }
+
+// MARK: - Text Field Delegate
+
+extension NamingViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
