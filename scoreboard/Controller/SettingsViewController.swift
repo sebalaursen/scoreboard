@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var scoreTF: UITextField!
     @IBOutlet weak var timeTF: UITextField!
-    let times = ["1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes"]
+    let times = ["1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes", "8 minutes", "9 minutes", "10  minutes"]
     let points = ["5", "10", "15"]
     
     override func viewDidLoad() {
