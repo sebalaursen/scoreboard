@@ -85,14 +85,17 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == timeTF.inputView {
             timeTF.text = times[row]
-            if let num = timeTF.text!.components(separatedBy: " ").first {
-                Settings.setMaxTime(Int(num)!)
+            if times[row] != "" {
+                if let num = timeTF.text!.components(separatedBy: " ").first {
+                    UserDefaults.standard.set(Int(num), forKey: "maxTime")
+                }
             }
         }
         else {
-            let point = points[row]
-            scoreTF.text = point
-            Settings.setMaxPoint(Int(point)!)
+            scoreTF.text = points[row]
+            if points[row] != "" {
+                UserDefaults.standard.set(Int(scoreTF.text!)!, forKey: "maxPoints")
+            }
         }
     }
 }
