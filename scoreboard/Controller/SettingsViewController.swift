@@ -48,11 +48,15 @@ class SettingsViewController: UIViewController {
         timeTF.inputAccessoryView = toolBar
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        scoreTF.text = String(Settings.maxPoint)
+        timeTF.text = "\(Settings.maxTime) minutes"
+    }
     @objc func dismissPicker() {
         view.endEditing(true)
     }
-    
-    
 }
 
 extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {

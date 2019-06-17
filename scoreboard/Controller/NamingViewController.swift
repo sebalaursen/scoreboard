@@ -12,7 +12,8 @@ protocol NamingDelegate: class {
     func getName(leftName: String, rightName: String)
 }
 
-class NamingViewController: UIViewController {
+class NamingViewController: UIViewController, Storyboarded {
+    
     @IBOutlet weak var leftNameTF: UITextField!
     @IBOutlet weak var rightNameTF: UITextField!
     

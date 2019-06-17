@@ -20,6 +20,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var rightNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var reverseButton: UIButton!
+    @IBOutlet weak var scoreStackView: UIStackView!
+    
+    fileprivate lazy var namePopUp = NamingViewController.instantiate()
+    fileprivate lazy var finishPopUp = FinishViewController.instantiate()
     
     fileprivate var currentState = ScoreboardState.clear {
         willSet {
@@ -33,8 +38,21 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentState = .clear
         addGestures()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        currentState = .clear
+        showNamingPopUp()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer?.invalidate()
+        
+        namePopUp.removeFromParent()
+        finishPopUp.removeFromParent()
     }
     
     private func addGestures() {
@@ -49,54 +67,20 @@ class MainViewController: UIViewController {
         rightScoreLabel.addGestureRecognizer(tap1)
         rightScoreLabel.addGestureRecognizer(hold1)
     }
-}
-
-// MARK: - Actions
-
-extension MainViewController {
-    
-    private func showNamingPopUp() {
-        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NamingVC") as! NamingViewController
-        self.addChild(popUp)
-        popUp.view.frame = CGRect(x: -view.frame.width, y: 0, width: view.frame.width, height: view.frame.height)
-        self.view.addSubview(popUp.view)
-
-        UIView.animate(withDuration: 0.3) {
-            popUp.view.frame.origin.x = 0
-        }
-    }
-    
-    private func showFinishPopUp(title: String, leftScore: String, rightScore: String) {
-        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishVC") as! FinishViewController
-        self.addChild(popUp)
-        popUp.view.frame = CGRect(x: 0, y: -view.frame.height, width: view.frame.width, height: view.frame.height) //self.view.frame
-        self.view.addSubview(popUp.view)
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            popUp.view.frame.origin.y = 10
-        }) { (finished) in
-            UIView.animate(withDuration: 0.09, animations: {
-                popUp.view.frame.origin.y = -7
-            }) { (finished) in
-                UIView.animate(withDuration: 0.06) {
-                    popUp.view.frame.origin.y = 0
-                }
-            }
-        }
-    }
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         guard let score = sender.view as! UILabel? else {
             return
         }
-        var current = Int(score.text!)!
+        guard var current = Int(score.text ?? "0") else { return }
         
-        if current == Settings.maxPoint {
-            currentState = .finished
+        if current >= Settings.maxPoint {
+            self.currentState = .finished
         } else {
             current += 1
             score.text = "\(current)"
         }
+        
     }
     
     @objc private func handleHold(sender: UITapGestureRecognizer) {
@@ -104,9 +88,63 @@ extension MainViewController {
             guard let score = sender.view as! UILabel?, score.text != "0" else {
                 return
             }
-            var current = Int(score.text!)!
+            guard var current = Int(score.text ?? "0") else { return }
             current -= 1
             score.text = "\(current)"
+        }
+    }
+}
+
+// MARK: - Actions
+
+extension MainViewController {
+    
+    private func showNamingPopUp() {
+        self.addChild(namePopUp)
+        namePopUp.delegate = self
+        namePopUp.view.frame = CGRect(x: -view.frame.width, y: 0, width: view.frame.width, height: view.frame.height)
+        self.view.addSubview(namePopUp.view)
+
+        UIView.animate(withDuration: 0.3) {
+            self.namePopUp.view.frame.origin.x = 0
+        }
+    }
+    
+    private func showFinishPopUp(title: String, leftScore: String, rightScore: String) {
+        finishPopUp.delegate = self
+        self.addChild(finishPopUp)
+        self.view.addSubview(finishPopUp.view)
+        
+        finishPopUp.titleLabel.text = title
+        finishPopUp.leftScoreLabel.text = leftScore
+        finishPopUp.rightScoreLabel.text = rightScore
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.finishPopUp.view.frame.origin.y = 10
+        }) { (finished) in
+            UIView.animate(withDuration: 0.09, animations: {
+                self.finishPopUp.view.frame.origin.y = -7
+            }) { (finished) in
+                UIView.animate(withDuration: 0.06) {
+                    self.finishPopUp.view.frame.origin.y = 0
+                }
+            }
+        }
+    }
+    
+    @IBAction func scoreReverse(_ sender: Any) {
+        
+        if leftScore != rightScore {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.scoreStackView.transform = CGAffineTransform(scaleX: -1, y: 1)
+                self.reverseButton.alpha = 0
+            }) { finished in
+                self.reverseButton.alpha = 1
+                self.scoreStackView.transform = .identity
+                let leftScoreTemp = self.leftScore
+                self.leftScoreLabel.text = String(self.rightScore)
+                self.rightScoreLabel.text = String(leftScoreTemp)
+            }
         }
     }
     
@@ -120,12 +158,14 @@ extension MainViewController {
     }
     
     @IBAction func reset(_ sender: UIButton) {
-        
         let enteredState = self.currentState
         currentState = .paused
 
         let alert = UIAlertController(title: nil, message: "Are you sure you want to reset score board ?", preferredStyle: .actionSheet)
-        let resetAction = UIAlertAction(title: "Reset", style: .destructive) { _ in self.currentState = .clear }
+        let resetAction = UIAlertAction(title: "Reset", style: .destructive) {
+            _ in self.currentState = .clear
+            self.showNamingPopUp()
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
             _ in if enteredState == .running {
                 self.currentState = .running
@@ -138,8 +178,8 @@ extension MainViewController {
     }
     
     @IBAction func doubleScoreTapped(_ sender: Any) {
-        guard var currentLeftScore: Int = Int(self.leftScoreLabel?.text ?? "0") else { return }
-        guard var currentRightScore: Int = Int(self.rightScoreLabel?.text ?? "0") else { return }
+        var currentLeftScore = leftScore
+        var currentRightScore = rightScore
         
         currentLeftScore += 1
         currentRightScore += 1
@@ -147,7 +187,7 @@ extension MainViewController {
         self.leftScoreLabel.text = "\(currentLeftScore)"
         self.rightScoreLabel.text = "\(currentRightScore)"
         
-        if currentRightScore == Settings.maxPoint || currentLeftScore == Settings.maxPoint {
+        if currentRightScore >= Settings.maxPoint || currentLeftScore >= Settings.maxPoint {
             currentState = .finished
         }
     }
@@ -156,6 +196,19 @@ extension MainViewController {
 // MARK: - Scoreboard State
 
 extension MainViewController {
+    
+    var leftScore: Int {
+        return Int(leftScoreLabel.text ?? "0") ?? 0
+    }
+    
+    var rightScore: Int {
+        return Int(rightScoreLabel.text ?? "0") ?? 0
+    }
+    
+    var finishTitle: String {
+        let winnerName = leftScore > rightScore ? leftNameLabel.text : rightNameLabel.text
+        return leftScore == rightScore ? "Draw!" : "\(winnerName ?? "") has won!"
+    }
     
     private func stateDidChange(with state: ScoreboardState) {
         switch state {
@@ -177,7 +230,7 @@ extension MainViewController {
     }
     
     private func finishFight() {
-        
+        showFinishPopUp(title: finishTitle, leftScore: String(leftScore), rightScore: String(rightScore))
     }
     
     private func pauseScore() {
@@ -219,5 +272,24 @@ extension MainViewController {
     private func finishTimer() {
         timer?.invalidate()
         timer = nil
+    }
+}
+
+// MARK: - Naming  & Finish Delegate
+
+extension MainViewController: NamingDelegate, FinishDelegate {
+    
+    func cancelTapped() {
+        currentState = .clear
+        showNamingPopUp()
+    }
+    
+    func rematchTappded() {
+        currentState = .clear
+    }
+    
+    func getName(leftName: String, rightName: String) {
+        self.leftNameLabel.text = leftName
+        self.rightNameLabel.text = rightName
     }
 }

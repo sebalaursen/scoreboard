@@ -9,10 +9,12 @@
 import UIKit
 
 protocol FinishDelegate: class {
-    var isRematch: Bool { get set}
+    func cancelTapped()
+    func rematchTappded()
 }
 
-class FinishViewController: UIViewController {
+class FinishViewController: UIViewController, Storyboarded {
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leftScoreLabel: UILabel!
     @IBOutlet weak var rightScoreLabel: UILabel!
@@ -27,7 +29,7 @@ class FinishViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = -self.view.frame.height
         }) { (finished) in
-            self.delegate?.isRematch = true
+            self.delegate?.rematchTappded()
             self.view.removeFromSuperview()
         }
     }
@@ -37,7 +39,7 @@ class FinishViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = self.view.frame.height
         }) { (finished) in
-            self.delegate?.isRematch = false
+            self.delegate?.cancelTapped()
             self.view.removeFromSuperview()
         }
     }
