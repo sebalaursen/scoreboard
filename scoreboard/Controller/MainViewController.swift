@@ -133,7 +133,6 @@ extension MainViewController {
     }
     
     @IBAction func scoreReverse(_ sender: Any) {
-        
         if leftScore != rightScore {
             UIView.animate(withDuration: 0.4, animations: {
                 self.scoreStackView.transform = CGAffineTransform(scaleX: -1, y: 1)
