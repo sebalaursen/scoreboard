@@ -74,11 +74,11 @@ class MainViewController: UIViewController {
         }
         guard var current = Int(score.text ?? "0") else { return }
         
+        current += 1
+        score.text = "\(current)"
+        
         if current >= Settings.maxPoint {
             self.currentState = .finished
-        } else {
-            current += 1
-            score.text = "\(current)"
         }
         
     }
@@ -111,6 +111,7 @@ extension MainViewController {
     }
     
     private func showFinishPopUp(title: String, leftScore: String, rightScore: String) {
+        
         finishPopUp.delegate = self
         self.addChild(finishPopUp)
         self.view.addSubview(finishPopUp.view)
