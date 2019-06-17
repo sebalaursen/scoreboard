@@ -12,8 +12,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var scoreTF: UITextField!
     @IBOutlet weak var timeTF: UITextField!
-    let times = [ "", "1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes"]
-    let points = [ "", "5", "10", "15"]
+    let times = ["1 minute", "2 minutes", "3 minutes", "4 minutes", "5 minutes", "6 minutes", "8 minutes", "9 minutes", "10  minutes"]
+    let points = ["5", "10", "15"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +48,15 @@ class SettingsViewController: UIViewController {
         timeTF.inputAccessoryView = toolBar
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        scoreTF.text = String(Settings.maxPoint)
+        timeTF.text = "\(Settings.maxTime) minutes"
+    }
     @objc func dismissPicker() {
         view.endEditing(true)
     }
-    
-    
 }
 
 extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
